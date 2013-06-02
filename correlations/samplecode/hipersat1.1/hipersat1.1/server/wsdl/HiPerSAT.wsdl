@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions 
+    name="HiPerSATService"
+    targetNamespace="http://rubato.nic.uoregon.edu/wsdl/HiPerSAT.wsdl"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://rubato.nic.uoregon.edu/wsdl/HiPerSAT.wsdl"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+    <message name="testRequest">
+    </message>
+
+    <message name="testResponse">
+        <part name="return" type="xsd:string"/>
+    </message>
+
+    <portType name="TestPortType">
+        <operation name="test">
+            <input message="tns:testRequest"/>
+            <output message="tns:testResponse"/>
+        </operation>
+    </portType>
+
+    <binding 
+        name="TestBinding"
+        type="tns:TestPortType">
+        <soap:binding 
+            style="rpc"
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="test">
+            <soap:operation soapAction="test"/>
+            <input>
+                <soap:body
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    use="encoded"/>
+            </input>
+            <output>
+                <soap:body
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    use="encoded"/>
+            </output>
+        </operation>
+    </binding>
+
+    <message name="queueRequest">
+    </message>
+
+    <message name="queueResponse">
+        <part name="return" type="xsd:string[]"/>
+    </message>
+
+    <portType name="QueuePortType">
+        <operation name="queue">
+            <input message="tns:queueRequest"/>
+            <output message="tns:queueResponse"/>
+        </operation>
+    </portType>
+
+    <binding
+        name="QueueBinding"
+        type="tns:QueuePortType">
+        <soap:binding
+            style="rpc"
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="queue">
+            <soap:operation soapAction="queue"/>
+             <input>
+                <soap:body
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    use="encoded"/>
+            </input>
+            <output>
+                <soap:body
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    use="encoded"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="TestService">
+        <documentation>
+            Just a test
+        </documentation>
+        <port 
+            name="TestPort"
+            binding="tns:TestBinding">
+            <soap:address
+                location="http://rubato.nic.uoregon.edu:4063/SOAP"/>
+        </port>
+        <port
+            name="QueuePort"
+            binding="tns:QueueBinding">
+            <soap:address
+                location="http://rubato.nic.uoregon.edu:4063/SOAP"/>
+        </port>
+    </service>
+
+</definitions>

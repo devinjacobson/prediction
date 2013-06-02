@@ -1,0 +1,51 @@
+# Compiler and system tools
+    CXX = g++
+    # The C++ Compiler. Must be set
+
+    CC = gcc
+    # The C compiler. Must be set
+
+    RM = rm -rf
+    # The tool for removing files. Must be set for 'make clean' to work
+    # suggested setting is rm -rf
+
+# Build flags
+    CXX_FLAGS = -O3
+
+# Matrix: Lapack and Blas
+    LAPACK_DEFINE =  -D__MAC_LAPACK
+    # The Lapack System to use. Choices are one of:
+    # -D__PPC64_ESSL
+    # -D__NEURONIC_MKL
+    # -D__MANUAL_LAPACK
+    # -D__MAC_LAPACK
+
+    MATRIX_INCLUDE = -I/System/Library/Frameworks/vecLib.framework/Headers
+    # The include paths flag for the compiler. i.e. -I/usr/local/include
+
+    MATRIX_LIB_PATH =
+    # The library flags for the compiler
+
+    MATRIX_LIBS = -faltivec -framework Accelerate
+    # The matrix libraries
+
+# TAU
+    TAU_DEFINE = -DUSE_TAU_PROFILING
+    # Set to -DUSE_TAU_PROFILING to enable profiling
+
+    TAU_MAKEFILE = /Users/hoge/prl/tau2/apple/lib/Makefile.tau-cxx
+    include $(TAU_MAKEFILE)
+    # Set to full path of the TAU Makefile if profiling is enabled
+    # and uncomment the include line
+
+# OPENMP
+    OMP_DEFINE =
+    # Set to -D__OPENMP_ to enable OpenMP
+
+# MPI
+    MPI_DEFINE =
+    # Set to -D__DISTRIBUTED
+    # In addition, add one of
+    # -DUSE_INTEL_MPICH
+    # -DUSE_LAMMPI
+    # -DUSE_MPICH2

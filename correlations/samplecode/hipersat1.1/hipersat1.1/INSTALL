@@ -1,0 +1,265 @@
+================================================================================
+                       HiPerSAT v1.0 Installation Guide
+================================================================================
+
+[0] License and Disclaimer
+[1] Requirements
+[2] Quick Start 
+[3] Custom Configuration
+[4] Matlab Integration
+[5] Octave Integration
+[6] EEGLab Integration
+[7] Testing
+
+[0] License and Disclaimer
+----------------------------------------------------------------------
+High Performance Signal Analysis Toolkit, HiPerSAT                                   
+Copyright 2005-2006                                           
+Neuroinformatics Center, University of Oregon                  
+
+Send questions, feature requests and bug reports to hipersat@nic.uoregon.edu
+       
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation, and that the name of University of Oregon (UO)
+and Neuroinformatics Center (NIC) not be used in advertising or 
+publicity pertaining to distribution of the software without specific, 
+written prior permission.  The University of Oregon and Neuroinformatics
+Center make no representations about the suitability of this software 
+for any purpose.  It is provided "as is" without express or implied warranty.
+
+UO AND NIC DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
+INCLUDING, AND ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, 
+IN NO EVENT SHALL THE UNIVERSITY OF OREGON OR NIC BE LIABLE FOR
+ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+[1] Requirements
+----------------------------------------------------------------------
+HiPerSAT has the following requirements
+
+* One of:
+gcc >= 3.0
+Intel C++ compiler (icpc)
+IBM/Absoft's C++ compiler (xlC)
+
+* Gnu Make (it's easier to install a portable make than it is to make 
+a portable makefile)
+* BLAS
+* LAPACK
+
+Optional Packages:
+MPI (LAM MPI and MPICH have been tested)
+OpenMP (available with icpc and xlC)
+
+[2] Quick Start 
+----------------------------------------------------------------------
+If you are running Linux or Mac with gcc you should be able to build
+HiPerSat without any configuration. 
+
+For Linux enter this command in the top-level hipersat directory:
+% make SYSTEM=linux_gcc
+
+For Macintosh enter this command in the top-level hipersat directory:
+% make SYSTEM=mac_gcc
+
+This will build HiPerSAT and install it in a directory called
+hipersat-1.0. 
+
+[4] Custom Configuration
+----------------------------------------------------------------------
+HiPerSAT has been successfully built on a variety of different platforms
+using a variety of different compilers. Although a traditional free 
+software configure system has not yet been implemented for HiPerSAT, we
+have provided a simple template for configuring your own system.
+
+In the system directory you will find several files with the naming
+convention 'make.system', where system is a description of the configuration.
+'make.skel' has a blank configuration file with suggested values for
+different configurations in the comments.
+
+To create a build for your configuration, issue the command:
+% make SYSTEM=<system>
+where <system> matches the suffix for your custom makefile. For example,
+if your makefile is called 'make.ia64_gcc' you would build with
+% make SYSTEM=ia64_gcc
+
+If you want to configure for Intel's compiler, take a look at the 
+make.neuronic_icc_unified file. The Intel compiler supports OpenMP, and
+our implementation of Infomax has been optimized to use multiple processors
+with OpenMP.
+
+If you want to configure for IBM's (Absoft's) xlC, take a look at the
+make.p6xx_xlc_unified file. xlC also supports OpenMP.
+
+If you have MPI installed on your system you can use an MPI-aware version
+of FastICA, which has near linear scaling.
+
+Feel free to contact the current maintainer, hipersat@nic.uoregon.edu for
+assistance in configuring HiPerSAT for your system.
+
+[4] Matlab Integration
+----------------------------------------------------------------------
+To integrate HiPerSAT into your Matlab environment, add the directory
+'hipersat-1.0/eeglab/hipersat' to your Matlab path. Check the installation
+in Matlab by typing:
+
+>> help hInfomax
+  Perform Independent Component Analysis (ICA) decomposition of
+  input data using the Infomax ICA algorithm of Bell & Sejnowski (1995)
+  using the default arguments for the eeglab implementation (runica)
+ 
+  Usage:
+  >> [weights, sphering] = hInfomax( data )
+  
+  Input:
+     data = input data (channels, samples)
+ 
+  Output:
+     weights = the computed weight matrix
+     sphering = the computed sphering matrix
+
+To check that the binary tools are working from Matab enter:
+
+>> hInfomax( 0 )
+HiPerSAT Infomax v. 1.0 (r1062)
+
+Copyright 2005-2006, Neuroinformatics Center, University of Oregon
+The University of Oregon makes no representations about the
+suitability for this software for any purpose. It is provided
+"as is" without express or implied warranty.
+
+
+maximum iterations: 512
+512 1e-06 100
+1: Learning Rate:inf, delta: 0
+after search for weights
+0 
+
+ans =
+
+     1
+
+Usage for hInfomax, hSobi, and hFastICA can be obtained by using the
+build in 'help' command.
+
+
+[5] Octave Integration
+----------------------------------------------------------------------
+Octave is a free software alternative to Matlab. This release has
+preliminary support for Octave. To integrate HiPerSAT into your
+Octave environment, use the following steps.
+
+First, you need to modify the HiPerSAT wrapper scripts to work in
+Octave. The files hInfomax.m, hFastICA.m and hSobi.m have two blocks 
+of code that need to be enabled, and two blocks that need to be 
+disabled. These blocks are labeled as either 
+"The following x lines work in Matlab" or "The following x lines work in Octave."
+
+Once the files have been edited to work with Octave, you
+can start Octave up.
+
+When you first start the Octave environment, type
+>>> LOADPATH = [ DEFAULT_LOADPATH ":<path to hipersat>/eeglab/hipersat" ];
+
+So, if your path to hipersat is "/home/fred/hipersat-1.0" you would enter
+>>> LOADPATH = [ DEFAULT_LOADPATH ":/home/fred/hipersat-1.0/eeglab/hipersat" ];
+
+You will need to set this variable every time Octave starts up. Alternatively
+you can add the command to your ~/.octaverc file. The commands in that file
+are executed automatically when octave is launched.
+
+To check that the binary tools are working from Octave enter:
+
+>>> hInfomax( 0 )
+
+HiPerSAT Infomax v. 1.0 (r1062)
+
+Copyright 2005-2006, Neuroinformatics Center, University of Oregon
+The University of Oregon makes no representations about the
+suitability for this software for any purpose. It is provided
+"as is" without express or implied warranty.
+
+
+maximum iterations: 512
+512 1e-06 100
+1: Learning Rate:inf, delta: 0
+after search for weights
+0 
+ans = 1
+
+[6] EEGLab Integration
+----------------------------------------------------------------------
+First, follow the directions for integrating HiPerSAT with Matlab
+To install HiPerSAT for use with EEGLab, you will need to edit the
+pop_runica.m script in the EEGLab distribution.
+
+In EEGLab version 4.514, the text fragment below should be inserted just
+before the following code in eeglab4.514/functions/pop_runica.m:
+
+
+otherwise,
+
+    error('Pop_runica: unrecognized algorithm');
+
+end;
+
+
+Below is the text fragment to insert into pop_runica.m.
+                
+% --------------------------------------------------------------------------
+
+    case { 'hfastica' , 'hinfomax' }
+
+        [EEG, cancel] = EeglabToHiPerSat(options, EEG, icatype, tmpdata);
+                    
+        if cancel
+
+            return; 
+
+        end     
+
+% ---------------------------------------------------------------------------
+                    
+
+In other words, the modified pop_runica.m should look like:
+
+% ---------------------------------------------------------------------------
+    
+    case { 'hfastica' , 'hinfomax' }
+
+        [EEG, cancel] = EeglabToHiPerSat(options, EEG, icatype, tmpdata);
+                    
+        if cancel
+
+            return; 
+
+        end     
+% ---------------------------------------------------------------------------
+                        
+    otherwise
+
+        error('Pop_runica: unrecognized algorithm');
+
+end;
+
+[7] Testing
+----------------------------------------------------------------------
+HiPerSAT includes a test directory to check the integrity of the C++
+implementations. To run the complete test suite you need to download
+the test data files from the HiPerSAT web-site, 
+
+http://www.nic.uoregon.edu/hipersat/index.php
+
+Extract this package, and place the resulting testData directory in 
+the test/ subdirectory of the HiPerSat distribution. In the test
+subdirectory type 
+
+% make SYSTEM=<system> selftests
+
+The tests, especially the matrix multiplication tests, take some time
+to run. Please report any failures to hipersat@nic.uoregon.edu

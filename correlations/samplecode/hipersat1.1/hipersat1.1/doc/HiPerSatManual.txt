@@ -1,0 +1,308 @@
+HiPerSAT v1.1 Guide
+===================
+
+Contents:
+
+* 0 License and Disclaimer
+* 1 About data formats for the HiPerSAT toolkit
+* 2 HiPerSAT Infomax      (hInfomax)
+* 3 HiPerSAT FastICA      (hFastICA)
+* 4 HiPerSAT Sobi         (hSobi)
+* 5 HiPerSAT Sphering     (hSphering)
+* 6 HiPerSAT Convert Data (hConvertData)
+* 7 HiPerSAT FIR Filter   (dFilter)
+* 8 Matlab and Octave integration
+* 9 EEGLAB integration
+* 10 Authors
+
+0 License and Disclaimer
+--------------------------
+**High Performance Signal Analysis Toolkit, HiPerSAT**  
+**Copyright 2005-2006** 
+**Neuroinformatics Center, University of Oregon**   
+       
+**Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation, and that the name of University of Oregon (UO)
+and Neuroinformatics Center (NIC) not be used in advertising or 
+publicity pertaining to distribution of the software without specific, 
+written prior permission.  The University of Oregon and Neuroinformatics
+Center make no representations about the suitability of this software 
+for any purpose.  It is provided "as is" without express or implied 
+warranty.**
+
+**UO AND NIC DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
+INCLUDING, AND ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, 
+IN NO EVENT SHALL THE UNIVERSITY OF OREGON OR NIC BE LIABLE FOR
+ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.**
+
+Send questions, feature requests and bug reports to [the HiPerSAT maintainer](mailto:hipersat@nic.uoregon.edu)
+
+1 About data formats for the HiPerSAT toolkit
+-----------------------------------------------
+HiPerSAT uses simple binary and text data formats to read and write
+data. It also supports the EGI .raw data format. All of the algorithms
+can be run on single or double precision floating point data.
+
+Three formats are supported: binary big-endian data, binary little-endian,
+and plain text. The binary formats store the data as 4 byte singles
+or 8 byte doubles, with each time slice stored continuously as a column of 
+data. The text format is floating point, with each time slice stored 
+continuously as a column of data.
+
+To load the binary data (not EGI raw) into Matlab it is sufficient to use Matlab'sbinary file I/O functions. For example, to read in a 100x120 
+big-endian matrix:
+
+    >> fid = fopen( 'data', 'rb', 'b' );
+    >> data = fread( fid, 100*120, 'double' );
+    >> data = reshape( data, 100, 120 );
+
+To load a text data file into Matlab, it is important that the data
+be transposed after loading:
+
+    >> load data;
+    >> data = data';
+
+The number of data points and shape of data is not stored in the 
+data file, and must be specified for all of the tools. We expect to 
+address this shortcoming in the near future.
+
+2 HiPerSAT Infomax (hInfomax)
+---------------------------------
+hInfomax is a limited implementation of the eeglab version of Infomax.
+Currently it does not support extended mode.
+
+Sample basic usage:
+
+    ./hInfomax -i testData -if big -c 34 -s 76001 -sphering \
+    -om weights -os sphering -of text
+
+This will load the 34x76001 big-endian binary data set named "testData". It
+will run Infomax with the default settings, and output the resulting weight
+and sphering matrices as text to the files "weights" and "sphering."
+
+You must specify either the -sphering option or -os option
+
+notes:
+hInfomax uses a custom implementation of the Mersenne Twister to generate 
+random numbers. This makes any given hInfomax run reproducible; the
+seed is not randomized. To create different execution paths you will need
+to use the -seed argument with an integer value.
+
+A complete set of options is listed below:
+
+    Required options:
+    -i <string> : input data file name
+    -if <string> : input data format ( big, little, native, text, raw )
+    -c <integer> : number of input channels
+    -s <integer> : number of samples per channel
+    -sphering : flag sphering of data
+
+    Other options:
+    -anneal <double> : annealing constant (default 0.90)
+    -annealdeg <double> : annealing degree weight change (default 70)
+    -block <integer> : ICA block size (default heuristic)
+    -h : usage information
+    -lrate <double> : initial ICA learning rate << 1 (default heuristic)
+    -maxsteps <integer> : maximum number of ICA training steps
+    -o <string> : unmixed data file name
+    -of <string> : output data format ( big, little, native, text )
+    -om <string> : mixing matrix file name
+    -ow <string> : the unmixing matrix file name
+    -os <string> : sphering matrix file name
+    -og <string> : the weight matrix file name
+    -seed <integer> : seed for random number generator (default 123456)
+    -stop <double> : weight change tolerance to stop training 
+                     (default for channels < 34, 1e-6, else 1e-7)
+    -verbose : give ascii messages of progress
+    -g <string> : initial weight matrix (identity, random, user)
+    -ig <string> : file name for user weights
+
+3 HiPerSAT FastICA      (hFastICA)
+--------------------------------------
+hFastICA is a limited implementation of the FastICA toolbox distributed
+for eeglab.
+
+Sample basic usage (hFastICA has no default values set, this will be
+updated in a future release):
+
+    ./hFastICA -i data -if big -c 34 -s 76001 -sphering -C cubic -I 1000 \
+    -r 10 -t 1e-6 -w identity -om mixing -os sphering
+
+This will load a 34x76001 array from a binary big-endian file and run the
+FastICA algorithm with a cubic nonlinearity, outputting the results to
+text files named "sphering" and "mixing".
+
+    Required options:
+    -i <string> : input data file name
+    -if <string> : input data format ( big, little, native, text )
+    -c <integer> : number of input channels
+    -s <integer> : number of samples per channel
+    -C <string> : contrast function ( cubic, hyptan, gaussian )
+    -t <double> : convergence tolerance
+    -g <string> : weight matrix initialization type ( identity, random, user )
+    -r <integer> : maximum number of retries (using random restarts)
+    -I <integer> : maximum number of iterations per channel
+
+    Other options:
+    -sphering : compute sphering matrix from input data
+    -is <string> : load precomputed sphering matrix from file
+    -o <string> : unmixed data file name
+    -of <string> : output data format ( big, little, native, text )
+    -om <string> : mixing matrix file name
+    -ow <string> : the unmixing matrix file name
+    -os <string> : sphering matrix file name
+    -og <string> : weights matrix file name
+    -ig <string> : weight matrix initialization file name
+    -h : usage information
+
+4 HiPerSAT Sobi         (hSobi)
+-----------------------------------
+hSobi is an implementation of a the Second Order Blind Identification
+algorithm. Unlike the FastICA and Infomax implementations provided here,
+Sobi does not perform and sphering on the input data and assumes that
+the data has already been preprocessed. This deficiency will be addressed
+in a future  release of HiPerSAT. Data may be sphered for the Sobi
+algorithm using the hSphering tool.
+
+Sample usage:
+
+    ./hSobi -i data -if big -c 34 -s 76001 -o mixing -of text
+
+This will load a 34x76001 array from a binary big-endian file and
+rub the Sobi algorithm on it, outputting the mixing matrix to the
+text file "mixing".
+
+    Required options:
+    -c <integer> : number of channels
+    -i <string> : input file name
+    -if <string> : input data format ( big, little, native, text )
+    -o <string> : output file name for weight matrix
+    -of <string> : output data format ( big, little, native, text )
+    -s <integer> : number of samples
+
+    Additional options:
+    -h : usage
+
+5 HiPerSAT Sphering     (hSphering)
+---------------------------------------
+hSphering is a simple tool for performing "Infomax style" or "FastICA style"
+sphering on a data set. It was one of the first tools developed for 
+HiPerSAT, and shows some rough edges in it's usage. These will be made
+consistent with the rest of the toolkit in a future release. It does
+not output the sphering matrix, with will also be addressed in the
+next release.
+
+Sample usage:
+
+    ./hSphering -i data -ie bie -s 34 -c 76001 -o spheredData -oe big
+
+    Options:
+    -i <string> : input file
+    -it : input is text
+    -ie <string> : input binary data format (big or little)
+    -o <string> : output file
+    -oe <string> : output binary data format (big or little)
+    -ot : output is text
+    -c <integer> : number of channels
+    -h : prints usage
+    -s <integer> : number of samples
+
+
+6 HiPerSAT Convert Data (hConvertData)
+------------------------------------------
+hConvertData is a tool for converting between the three data formats
+supported by HiPerSAT.
+
+Sample usage:
+
+    ./hConvertData -i data -if big -c 34 -s 76001 -o data.txt -of text
+
+This will convert a big-endian binary file to a text file. Recall
+that the text data file is stored with elements in columns continuous.
+That is, if the components of a matrix are indexed A(i,j), they
+will be stored as A(0,0) A(1,0) A(2,0) ... A(c-1,0) A(0,1)... A(c-1,s-1)
+
+    Options:
+    -c <integer> : number of channels
+    -h : show usage
+    -i <string> : input file
+    -if <string> : input format (big, little, native, text)
+    -o <string> : output file
+    -of <string> : output format (big, little, native, text)
+    
+7 HiPerSAT FIR Filter   (dFilter)
+-----------------------------------
+dFilter is a tool for filtering a data set using a frequency impulse response (FIR) filter. It can run four different varieties of filters: low-pass, high-pass, band-pass and band-stop. Currently this implementation does not
+support EEG raw format data (use hConvertData to put it into a useable form).
+
+Sample usage:
+
+    ./dFilter -i data -o output -L 20 -H 60 -t bandpass -c 34 -s 76001 -r 250
+    
+This will run a band-pass filter that eliminated frequencies below 20Hz and above 60Hz from a data-set sampled at 250Hz. Input and output are big endian files.
+
+    Options:
+    
+    -H <double> : high cutoff
+    -L <double> : low cutoff
+    -c <integer> : number of channels
+    -g <double> : filter gain
+    -h : print this message
+    -i <string> : input file
+    -o <string> : output file
+    -r <integer> : sampling rate (Hz)
+    -s <integer> : number of samples
+    -t <string> : filter type ( gain, ramp, lowpass, highpass, bandpass, \
+                  bandstop )
+    -v : verbose
+    
+
+8 Matlab and Octave integration
+---------------------------------
+HiPerSAT includes integration with Matlab (and Octave). Simple tools for
+executing Infomax, FastICA, and Sobi with default values are provided and
+are named: hInfomax, hFastICA, and hSobi.
+
+To set up your environment for using the Matlab integration please see the
+INSTALL file.
+
+9 EEGLAB integration
+----------------------
+See the INSTALL document for information on how to integrate HiPerSAT
+with the EEGLab environment.
+
+In the dialogue to select an ica method, entering the value 'hinfomax'
+or 'hfastica' will open a dialogue to set up the parameters for and
+run the HiPerSAT versions of Infomax and FastICA. (note that under
+some configurations the dialogue window will not open, selecting
+runica again and entering 'hinfomax' or 'fastica' again will usually
+cause the window to open. We are investigating the cause of this problem).
+
+
+10 Authors
+-----------
+Chris Hoge is the current maintainer of HiPerSAT, and was responsible for
+the refactoring of the signal-cleaner code base to the current incarnation
+that you see here. He can be reached at [hipersat@nic.uoregon.edu](mailto:hipersat.nic.uoregon.edu).
+
+Dan Keith did much of the initial work on validating the HiPerSAT base, 
+with some assistance from Virat Angewal.
+
+Bob Frank coded the EEGLab integration scripts, provided technical
+assistance with Matlab, and was an invaluable resource in aiding the
+C++ development team in understanding the underlying mathematics behind
+the algorithms.
+
+HiPerSAT is a major revision of the signal-cleaner tool written by 
+Kevin Glass.
+
+Formatting Notes
+----------------
+This document is formatted using Markdown, and can be easily be converted
+to HTML using freely available Markdown to HTML processors.

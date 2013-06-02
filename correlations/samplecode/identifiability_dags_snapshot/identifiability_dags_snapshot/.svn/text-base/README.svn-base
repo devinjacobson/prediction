@@ -1,0 +1,144 @@
+Copyright (C) 
+1997-2002 Kevin Murphy
+2010-2011 Jonas Peters
+2010-2011 Joris Mooij
+2010-2011 Robert Tillman
+All rights reserved.  See the file COPYING_GPL for license terms.
+
+
+This package contains code to the paper
+Jonas Peters, Joris Mooij, Dominik Janzing, Bernhard Schoelkopf (2011): "Identifiability of Causal Graphs using Functional Models".
+
+It is written in Matlab and should work on any machine. 
+
+
+
+%%%%%%%%%%%%
+LICENSE
+%%%%%%%%%%%%
+
+This project is licensed under the GNU Public License version 3.
+Parts of the code are licensed under the more permissive (Free)BSD License.
+Each source code file contains notes about which license applies.
+
+
+
+%%%%%%%%%%%%
+DIRECTORY STRUCTURE
+%%%%%%%%%%%%
+./find_all_dags
+    Contains the main code and the experiments.
+    Licensed under FreeBSD.
+
+./pc
+    Contains the code for PC.
+    Licensed under GPL3.
+
+./fasthsic
+    Contains a fast implementation of HSIC (independence test)
+    See in this folder for installation instructions. 
+    Lincensed under FreeBSD
+
+./fit
+    Contains wrappers for different regression methods
+    Lincensed under FreeBSD
+
+./indtest
+    Contains wrappers for different indepence tests
+    Lincensed under FreeBSD
+
+./util
+    Contains some utilility functions
+    Lincensed under FreeBSD
+
+./mat-files
+    Contains results from the experiments shown in the paper
+
+
+
+%%%%%%%%%%%%%
+GETTING STARTED
+%%%%%%%%%%%%%
+The code needs the following packages
+- Some files require Matlab's Statistics Toolbox.
+- GPML 3.1 (should be in the matlab path).
+- fasthsic: Use Makefile (in the fasthsic folder) for compiling the C++ code. Note that
+you'll need the GNU Scientific Library packages and the Boost C++ libraries installed
+(on Ubuntu, you can do "sudo aptitude install libgsl0-dev libboost-dev").
+In case you get error messages similar to:
+
+	Warning: You are using gcc version "4.4.3-4ubuntu5)".  The earliest gcc version supported
+	         with mex is "4.0.0".  The latest version tested for use with mex is "4.2.0".
+	         To download a different version of gcc, visit http://gcc.gnu.org 
+
+you should setup your MEX compiler to use the older GNU compilers, because
+MatLab is incompatible with the newer ones. To do this, make the following
+changes in your .matlab/R2008b/mexopts.sh in the "glnx86" and "glnxa64"
+sections:
+  gcc -> gcc-4.1
+  g++ -> g++-4.1
+  g95 -> g95-4.1
+Also, make sure that these compiler versions are installed on your system (they are 
+installed on sambesi in case you want to compile MEX files for use on the cluster).
+
+
+
+%%%%%%%%%%%%%
+IMPORTANT FUNCTIONS
+%%%%%%%%%%%%%
+The function
+    find_all_dags2.m
+needs as
+INPUT:  X              should be N*d matrix (N = number of data points, d = number of variables);
+        fitmethod      function handle to the regression method (e.g., 'train_gp' or 'train_linear')
+        parsf          parameters for the regression method (can be empty);
+        ind_test       function handle to the independence test (e.g., 'indtest_corr', 'indtest_hsic', or 'indtest_chisq')
+        parsi          parameters for the independence test (can be empty);
+        alpha          threshold for each independence test (e.g., 0.05);
+        res            residuals for all fits (optional; will be calculated
+                       using fitmethod if unspecified or empty)
+OUTPUT: num_diff_dags        the number of different DAGs that the algorithm could fit to the data
+        causalorder_final    num_diff_dags-cell a causal ordering compatible with the dat
+        dags                 num_diff_dags-cell of the Directed Acyclic Graphs found by the algorithm
+        residuals_final      num_diff_dags-cell of N*d matrices containing the corresponding residuals
+
+
+
+
+%%%%%%%%%%%%%
+EXAMPLE
+%%%%%%%%%%%%%
+As a first example type
+
+X=rand(300,1)-0.5;
+Y=rand(300,1)-0.5;
+W=(X+1).^2-2*Y+rand(300,1)-0.5;
+[causalorder,num_diff_dags,dags,residuals]=find_all_dags2([X,Y,W],'train_gp',[],'indtest_hsic',[],0.05);
+
+into Matlab.
+
+
+%%%%%%%%%%%%%
+REPRODUCING FIGURES
+%%%%%%%%%%%%%
+The exp_ files describe (hopefully self-explaining), how the experiments were performed in the paper. The folder mat-files contains the results.  
+
+
+
+%%%%%%%%%%%%%
+CITATION
+%%%%%%%%%%%%%
+If you use this code (especially find_all_dags2.m), please cite the following paper:
+
+Jonas Peters, Joris Mooij, Dominik Janzing, Bernhard Schoelkopf:
+"Identifiability of Causal Graphs using Functional Models"
+UAI 2011 
+
+
+%%%%%%%%%%%%%
+PROBLEMS
+%%%%%%%%%%%%%
+If you have problems or questions (or find some bugs!), please do not hesitate to send an email:
+jonas.peters ---at--- tuebingen.mpg.de
+
+

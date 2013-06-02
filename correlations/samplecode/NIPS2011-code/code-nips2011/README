@@ -1,0 +1,70 @@
+About
+=====
+
+This is the source code accompanying our NIPS*2011 article:
+
+  On Causal Discovery with Cyclic Additive Noise Models
+  J. Mooij, D. Janzing, T. Heskes, B. Schölkopf
+  Advances in Neural Information Processing Systems 24 (NIPS*2011)
+
+or (for your convenience) in BibTeX format:
+
+  @inproceedings{MooijJanzingHeskesSchoelkopf_NIPS_11,
+    title     = {On Causal Discovery with Cyclic Additive Noise Models},
+    author    = {Joris M Mooij and Dominik Janzing and Tom Heskes and Bernhard Sch\"{o}lkopf},
+    booktitle = {{A}dvances in {N}eural {I}nformation {P}rocessing {S}ystems 24 ({NIPS}*2011)},
+    year      = {2011}
+  }
+
+It uses the LBFGSB MatLab wrapper by Peter Carbonetto, and the Fortran77 LBFGSB
+code written by Ciyou Zhu in collaboration with R.H. Byrd, P. Lu-Chen and J.
+Nocedal. This code has been included here for convenience. This code can be found
+in the lbfgsb/ subdirectory.
+
+It also uses the LBFGSB-related wrappers of the GPML toolbox 3.1. The toolbox is
+available at http://www.gaussianprocess.org/gpml/code but part of it has been included
+here for convenience. This code can be found in the gpml-util/ subdirectory.
+
+In addition, the software depends on the GNU Scientific Library
+(http://www.gnu.org/software/gsl) and on the Boost C++ libraries
+(http://www.boost.org); these have not been included but need to be installed
+before this software can be built successfully.
+
+
+License
+=======
+
+This software is licensed under the FreeBSD license (also known as Simplified
+BSD license). See the file LICENSE for the exact license terms under which this
+software is distributed.
+
+
+Installation instructions
+=========================
+
+1. Install the GNU Scientific Library packages
+(for example, on Ubuntu this can be done by the command
+"sudo aptitude install libgsl0-dev")
+
+2. Install the Boost C++ libraries
+(for example, on Ubuntu this can be done by the command
+"sudo aptitude install libboost-dev")
+
+3. Build the fasthsic MEX file
+(change the supplied to reflect the local system configuration,
+and run "make" from within the fasthsic directory)
+
+3. Build the LBFGSB wrapper supplied with the GPML library
+(see gpml-matlab-v3.0-2010-07-23/README for details)
+
+
+Usage instructions
+==================
+
+Run the experiments in the paper by issuing "run_experiments" from MatLab or Octave.
+
+
+Questions?
+==========
+
+In case of questions, please contact Joris Mooij <j.mooij@cs.ru.nl>.

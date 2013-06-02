@@ -1,0 +1,215 @@
+// Lua C Interface (lci) to the NicMatrix class
+
+#include "lua.hpp"
+#include "lauxlib.h"
+#include "lualib.h"
+#include "NicMatrix.h"
+#include "DataFormat.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+#define checknicmatrix(L, arg) (NicMatrix<double>**)luaL_checkudata(L, arg, "hipersat.nicmatrix")
+
+extern "C"
+{
+    
+    static NicMatrix<double>** allocate_NicMatrix(lua_State* L, int rows, int columns)
+    {   
+        size_t dataSize = sizeof(NicMatrix<double>*);
+        // allocate the pointer to the memory that Lua sees here.
+        NicMatrix<double>** matrixPointer = (NicMatrix<double>**)lua_newuserdata(L, dataSize);
+
+        // allocate the C++ runtime memory here
+        *matrixPointer = new NicMatrix<double>(rows, columns);
+
+        luaL_getmetatable(L, "hipersat.nicmatrix");
+        lua_setmetatable(L, -2);
+        return matrixPointer;
+    }
+    
+    static int construct_NicMatrix(lua_State *L)
+    {
+        int rows = luaL_checkint(L,1);
+        int columns = luaL_checkint(L,2);
+    
+        allocate_NicMatrix(L, rows, columns);
+        
+        return 1;
+    }
+
+    static NicMatrix<double>** getMatrix_NicMatrix(lua_State* L, int arg)
+    {
+        // Get the matrix and check the type is correct
+        NicMatrix<double>** array = checknicmatrix(L,arg);
+        luaL_argcheck(L, array != NULL, arg, "'nicmatrix' expected");
+    
+        return array;
+    }
+
+    static int destruct_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** matrixPointer = getMatrix_NicMatrix(L,1);
+        delete (*matrixPointer);
+    }
+
+    static int rows_NicMatrix(lua_State *L)
+    {
+        // Get the matrix and check the type is correct
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+    
+        lua_pushinteger(L, (**array).rows());   
+        return 1;
+    }
+
+    static int columns_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+    
+        lua_pushinteger(L, (**array).columns());
+        return 1;
+    }
+
+    static int size_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+    
+        lua_pushinteger(L, (**array).size());
+        return 1;
+    }
+
+    static int get_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        int row = luaL_checkint(L, 2) - 1;
+        int column = luaL_checkint(L,3) - 1;    
+        luaL_argcheck(L, row >= 0 && row < (*array)->rows(), 2, "row index out of range");
+        luaL_argcheck(L, column >= 0 && row < (*array)->columns(), 3, "column index out of range");
+    
+        lua_pushnumber(L, (**array)(row, column));
+    
+        return 1;
+    }
+
+    static int set_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        int row = luaL_checkint(L, 2) - 1;
+        int column = luaL_checkint(L,3) - 1;
+        double value = luaL_checknumber(L,4);
+        luaL_argcheck(L, row >= 0 && row < (*array)->rows(), 2, "row index out of range");
+        luaL_argcheck(L, column >= 0 && column < (*array)->columns(), 3, "column index out of range");
+    
+        (**array)(row,column) = value;
+    
+        return 0;
+    }
+
+    static int getVector_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        int index = luaL_checkint(L,2) - 1;
+        luaL_argcheck(L, index >= 0 && index < (*array)->size(), 2, "index out of range");
+    
+        lua_pushnumber(L, ((**array).data())[index]);
+    
+        return 1;
+    }
+
+    static int setVector_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        int index = luaL_checkint(L,2) - 1;
+        double value = luaL_checknumber(L,3);
+        luaL_argcheck(L, index >= 0 && index < (*array)->size(), 2, "index out of range");
+    
+        ((**array).data())[index] = value;
+    
+        return 0;
+    }
+    
+    static int write_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        const char* filename = luaL_checkstring(L,2);
+        const char* filetype = luaL_checkstring(L,3);
+        
+
+        DataFormat format = NativeEndian;
+        std::ios_base::openmode mode = std::ios_base::out | std::ios_base::trunc;
+        if (filetype[0] == 'b' || filetype[0] == 'B')
+        {
+            format = BigEndian;
+            mode |= std::ios_base::binary;
+        }
+        else if (filetype[0] == 'l' || filetype[0] == 'L')
+        {
+            format = LittleEndian;
+            mode |= std::ios_base::binary;
+        }
+        else if (filetype[0] == 't' || filetype[0] == 'T')
+        {
+            format = Text;
+        }
+        std::ofstream outputFile(filename, mode );
+        (*array)->write(outputFile, format);
+        return 0;
+    }
+    
+    static int read_NicMatrix(lua_State *L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        const char* filename = luaL_checkstring(L,2);
+        const char* filetype = luaL_checkstring(L,3);
+        
+        std::ios_base::openmode mode = std::ios_base::in;
+
+        DataFormat format = NativeEndian;
+        
+        if (filetype[0] == 'b' || filetype[0] == 'B')
+        {
+            format = BigEndian;
+            mode |= std::ios_base::binary;
+        }
+        else if (filetype[0] == 'l' || filetype[0] == 'L')
+        {
+            format = LittleEndian;
+            mode |= std::ios_base::binary;
+        }
+        else if (filetype[0] == 't' || filetype[0] == 'T')
+        {
+            format = Text;
+        }
+        std::ifstream outputFile(filename, mode );
+        (*array)->read(outputFile, format);
+        return 0;
+    }
+
+    int string_NicMatrix(lua_State* L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        if (((*array)->columns() > 50) || ((*array)->rows() > 50))
+        {
+            lua_pushfstring( L, "NicMatrix(%dx%d)", (*array)->rows(), (*array)->columns());
+        }
+        else
+        {
+            std::stringstream ss(std::stringstream::in | std::stringstream::out);
+            (*array)->write(ss, Text);
+            lua_pushfstring(L, (ss.str().c_str()));
+        }
+        return 1;
+    }
+    
+    int copy_NicMatrix(lua_State* L)
+    {
+        NicMatrix<double>** array = getMatrix_NicMatrix(L,1);
+        int rows = (*array)->rows();
+        int columns = (*array)->columns();
+        NicMatrix<double>** copy = allocate_NicMatrix(L, 1, 1);
+        **copy = **array;
+        
+        return 1;
+    }
+
+}

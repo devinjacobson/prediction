@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="javadoc" name="fastica">
+
+	<property file="build.properties"/>
+
+	<path id="fastica.classpath">
+		<!-- no extra files needed -->
+	</path>
+
+	<target name="compile.init">
+		<mkdir dir="${fastica.dest}"/>
+	</target>
+
+	<target name="compile" depends="compile.init">
+		<javac source="1.5" target="1.5" optimize="on" 
+    		debug="${javac.debug}" debuglevel="${javac.debuglevel}"
+			srcdir="${fastica.src}" destdir="${fastica.dest}">
+			<classpath refid="fastica.classpath"/>
+			<include name="**"/>
+		</javac>
+	</target>
+
+	<target name="build" depends="compile" description="Create fastica jar">
+		<!-- delete old fastica jar file -->
+		<delete file="${fastica.jar}" failonerror="false"/>
+		<!-- create new jar-file -->
+		<jar destfile="${fastica.jar}" index="on" compress="on">
+			<fileset dir="${fastica.dest}" includes="**"/>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete file="${fastica.jar}" failonerror="false"/>
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${fastica.dest}"/>
+		</delete>
+	</target>	
+		
+	<target name="javadoc">
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${fastica.doc}"/>
+		</delete>
+		<mkdir dir="${fastica.doc}"/>
+		<javadoc
+			access="public" author="true" classpath="." destdir="${fastica.doc}" 
+			nodeprecated="false" nodeprecatedlist="false" noindex="false" 
+			nonavbar="false" notree="false" 
+			packagenames="org.fastica.swing,org.fastica.util,org.fastica,org.fastica.math" 
+			source="1.5" sourcepath="${fastica.src}" splitindex="true" use="false" version="true">
+			<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+		</javadoc>
+	</target>
+
+</project>

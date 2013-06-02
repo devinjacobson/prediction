@@ -1,0 +1,19 @@
+To build for your system identify the appropriate
+makefile in the ../system directory. The file will have
+the name make.sys. Then issue the command
+
+make SYSTEM=sys
+
+Please e-mail bugs, suggestions, comments, and concerns
+to the current maintainer: hipersat@cs.uoregon.edu
+
+###############
+
+The design of this library combines the world of Object-Oriented
+and Procedural programming. Many of the basic functions to do
+stuff to data are handled in procedures. Complex algorithms that
+carry a lot of state are bundled up in classes. Data and functions 
+that can be categorized generally falls into objects.
+
+While not the prettiest library in the world, it is leaps and 
+bounds ahead of what we started with.

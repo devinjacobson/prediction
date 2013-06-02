@@ -1,0 +1,29 @@
+# Include system specific values
+ifndef SYSTEM
+$(warning Usage:)
+$(warning ... $ make SYSTEM=xxx)
+$(warning )
+$(warning where SYSTEM=)
+$(warning ... mac_gcc - MacOSX g++)
+$(warning ... mac_gcc_mpi - MacOSX g++ w/LAMMPI)
+$(warning ... mac_gcc_tau - MacOSX g++ with TAU profiling)
+$(warning ... neuronic_icc_unified - Neuronic x86 icc with OpenMP and MPI )
+$(warning ... optix_icc_unified - Optix ia64 icc with OpenMP and MPI )
+$(warning ... p6xx_xlc_unified - p-series xlC with OpenMP and MPI )
+$(warning )
+$(warning Alternatively, SYSTEM may be defined before running make. E.g., )
+$(warning ... export SYSTEM=gcc_mac)
+$(warning )
+$(error SYSTEM must be specified)
+endif
+
+# tools to build
+TOOLS = hSphering \
+    hConvertData \
+    hFastICA \
+    hSobi \
+    hInfomax \
+    hReadRaw \
+    dFilter
+
+HIPERSAT = hipersat-1.1.alpha

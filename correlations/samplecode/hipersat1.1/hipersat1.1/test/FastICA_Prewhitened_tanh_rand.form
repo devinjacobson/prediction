@@ -1,0 +1,61 @@
+//
+//  FastICA Test form
+//  prewhitened data
+//  tanh contrast
+//
+
+Process: FastICA 
+Source data location: data/4x1001-x_WF.scf 
+File type: binary 
+Orientation: channels x observations 
+Channels: 4 
+Observations: 1001 
+N processors: 1
+
+
+//
+// FastICA form
+//
+
+Preprocessing procedure: 0
+Sphering matrix: none 
+Sphering source: "" 
+Sphering type: binary 
+Sphering orientation: column-major
+Convergence tolerance: 0.0001   
+Maximum iterations: 1000
+Retries: 5
+Contrast function: tanh 
+Initialization Type: random
+User defined source: "" 
+User defined type: binary 
+User defined orientation: column-major 
+
+
+
+//
+// ICA output form
+//
+Show convergence: no
+Weight matrix screen: n
+Mixing matrix screen: n
+Unmixing matrix screen: n
+Q matrix screen: n
+Lambda ^(-1/2) matrix screen: n
+Average vector screen: n
+Covariance matrix screen: n
+Sphering matrix screen: n
+File name: tmp/FastICA_Prewhitened_tanh_rand
+Weight matrix file: e
+// Mixing==A unmixing==W
+Mixing matrix file: n
+Unmixing matrix file: n
+Q matrix file: n
+Lambda ^(-1/2) matrix file: n
+Average vector file: n
+Covariance matrix file: n
+Sphering matrix file: e
+//Validate form load: yes
+
+
+

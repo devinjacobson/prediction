@@ -1,0 +1,45 @@
+Copyright (C) 
+1997-2002 Kevin Murphy
+2010-2011 Jonas Peters
+2010-2011 Robert Tillman
+
+This program (pc) is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program (see COPYING_GPL).  If not, see <http://www.gnu.org/licenses/>.
+
+
+The main function
+    function g = pc(X,cond_ind_test,pars,maxFanIn,alpha)
+applies the PC algorithm (including Meek's Rule) to the data matrix X. See pc.m for details.
+
+
+EXAMPLE:
+% generate data from the model
+%      1   2
+%    /  \ /
+%   3 -> 4
+% PC recovers the true Markov Equivalence Class
+% (arrows pointing downwards)
+samplesize=1000;
+alpha=0.05;
+X=rand(samplesize,1)-0.5;
+Y=rand(samplesize,1)-0.5;
+Z=0.5*X+rand(samplesize,1)-0.5;
+W=X+1.5*Z-1.9*Y+rand(samplesize,1)-0.5;
+dag=pc([X Y Z W],'indtest_corr',[],2,alpha);
+dag
+
+
+
+If you have any questions send an email to
+Jonas Peters [jonas.peters@tuebingen.mpg.de] or
+Robert Tillman [rtillman@cmu.edu]

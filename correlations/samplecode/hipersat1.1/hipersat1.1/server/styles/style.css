@@ -1,0 +1,129 @@
+body
+{
+    font-family: sans-serif;
+    background: #999999;
+}
+
+.clearfix:after
+{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+div.content
+{
+    margin: 20px;
+    padding: 10px;
+    background: #FFFFFF;
+    border: solid black 1px;
+}
+
+div.content h1
+{
+    padding: 10px;
+    margin: 10px;
+}
+
+div.content p
+{
+    padding: 10px;
+    margin: 10px;
+    width: 50%
+}
+
+td.formName
+{
+    text-align: right;
+}
+
+td.formHeader
+{
+    padding-top: 5px;
+    padding-bottom: 7px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 90%;
+    border-top: dotted black 1px;
+}
+
+td.submit
+{
+    text-align: right;
+}
+
+table.infomax
+{
+    border: solid black 1px;
+    padding: 10px;
+    margin: 10px;
+    background: #FBFBFB;
+}
+
+table.parameters
+{
+    margin: 10px;
+    border: solid black 1px;
+    padding: 10px;
+}
+
+table.parameters tr
+{
+    margin: 0px;
+    border: solid black 1px;
+}
+
+table.parameters td.formValue
+{
+    text-align: center;
+    border: solid black 1px;
+    margin: 0px;
+}
+
+table.parameters td.formName
+{
+    text-align: right;
+    margin: 0px;
+}
+
+table.filedb
+{
+    border: solid black 1px;
+    border-collapse: separate;
+}
+
+table.filedb tr
+{
+    border: solid black 1px;
+}
+
+table.filedb td
+{
+    border: solid black 1px;
+}
+
+td.cent
+{
+    text-align: center;
+}
+
+ul.hmenu
+{
+    border: solid black 1px;
+    padding: 10px;
+    width: 12em;
+}
+
+ul.hmenu li
+{
+    padding: 2px;
+    list-style: none;
+}
+
+ul.hmenu a:hover
+{
+    background: black;
+    color: white;
+}

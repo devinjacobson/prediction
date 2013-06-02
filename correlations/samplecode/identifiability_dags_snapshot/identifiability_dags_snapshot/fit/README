@@ -1,0 +1,39 @@
+usage e.g.:
+
+
+function [fit,eps,out] = fit_gp(X, Y, pars)
+   use pars.kernel
+   use pars.lengthscale
+end
+
+
+FIRST variant:
+
+
+function find_all_dags2(fitmethod,pars,...)
+  ...
+  X = ...
+  Y = ...
+  [fit, eps, out] = feval(fitmethod(X,Y,pars));
+  ...
+return
+
+pars.kernel = blabla;
+pars.lengthscale = blabla;
+find_all_dags2(fit_gp,pars,...);
+
+
+SECOND variant:
+
+
+function find_all_dags2(fitmethod,...)
+  ...
+  X = ...
+  Y = ...
+  [fit, eps, out] = feval(fitmethod(X,Y));
+  ...
+return
+
+pars.kernel = blabla;
+pars.lengthscale = blabla;
+find_all_dags2(@(X,Y) fit_gp(X,Y,pars),...);

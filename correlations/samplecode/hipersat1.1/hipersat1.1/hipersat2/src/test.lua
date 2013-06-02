@@ -1,0 +1,18 @@
+require "hipersat"
+
+x = nicmatrix.new(3,5)
+x:read("testMatrix.txt", "t")
+y = x:copy()
+a = x:center()
+c1 = x:covariance()
+c2 = y:covariance()
+eigenvectors, eigenvalues = c2:eigenvalues()
+print(x)
+print(y)
+print(c1)
+print(c2)
+print(a)
+print(eigenvectors:size())
+print(eigenvectors)
+print(eigenvalues:size())
+print(eigenvalues)

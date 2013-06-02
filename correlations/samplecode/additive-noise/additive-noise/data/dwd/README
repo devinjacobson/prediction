@@ -1,0 +1,9 @@
+dwd.dat:
+
+For the period 1961-1990, for 349 weather stations in Germany, the yearly averages of:
+Hoehe, Breite, Laenge, Sonne, Temp, Niederschlag
+(in English):
+altitude, latitude, longitude, sunshine duration, temperature, precipitation
+
+taken from
+http://www.dwd.de/bvbw/appmanager/bvbw/dwdwwwDesktop/?_nfpb=true&_pageLabel=_dwdwww_klima_umwelt_klimadaten_deutschland&T82002gsbDocumentPath=Navigation%2FOeffentlichkeit%2FKlima__Umwelt%2FKlimadaten%2Fkldaten__kostenfrei%2Fausgabe__mittelwerte__node.html__nnn%3Dtrue
