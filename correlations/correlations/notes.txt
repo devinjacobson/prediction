@@ -50,3 +50,9 @@ And from that we think we can determine if the model is significant or not.
 
 
 C:\web\chorrd\prediction\correlations\samplecode\hipersat1.1\hipersat1.1\src
+
+using this:
+https://github.com/devinjacobson/prediction
+as the repository.  
+Could do just dropbox if that is easier.  
+
