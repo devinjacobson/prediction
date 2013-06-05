@@ -56,3 +56,14 @@ https://github.com/devinjacobson/prediction
 as the repository.  
 Could do just dropbox if that is easier.  
 
+git clone prediction https://github.com/devinjacobson/prediction.git
+
+push to GIT!
+git remote add prediction https://github.com/devinjacobson/prediction.git
+git push -u prediction master
+
+
+http://perso.telecom-paristech.fr/~cardoso/icacentral/algos.html
+http://ee.ucd.ie/~pogrady/
+http://sccn.ucsd.edu/eeglab/
+http://people.kyb.tuebingen.mpg.de/arthur/fastkica.htm
