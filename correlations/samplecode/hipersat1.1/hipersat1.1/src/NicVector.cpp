@@ -214,6 +214,7 @@ bool NicVector<T>::resize( int size, bool copy )
         data = new T[size];
         n = size;
     }
+	return true;
 }
 
 #ifdef INSTANTIATE_TEMPLATES

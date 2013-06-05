@@ -6,7 +6,7 @@
 
 // this whole file is a bit of a mess. it needs to be
 // cleaned up
-
+#include "../../../../correlations/stdafx.h"
 #ifdef __PPC64_ESSL
 
 #include "essl.h"
@@ -108,7 +108,7 @@ int sgemm_(char *, char *, int *, int *, int *,
 
 //extern "C"
 //{
-//	#include "clapack.h"
+	#include "clapack.h"
 //}
 //
 //#else
@@ -116,7 +116,7 @@ int sgemm_(char *, char *, int *, int *, int *,
 extern "C"
 {
 //	#include "cblas.h"
-
+/*
 typedef int integer;
 typedef double doublereal;
 typedef float floatreal;
@@ -151,7 +151,7 @@ int sgemm_(char *, char *, int *, int *, int *,
 		  int *, float*, float*, int *);
 
 typedef int CLAPACK_integer;
-
+*/
 }
 
 

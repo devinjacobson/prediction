@@ -1,6 +1,6 @@
 #ifndef NICVECTOR_H_UNIVERSITY_OF_OREGON_NIC
 #define NICVECTOR_H_UNIVERSITY_OF_OREGON_NIC
-
+#include "../../../../correlations/stdafx.h"
 #include <iostream>
 #include "NicMatrix.h"
 

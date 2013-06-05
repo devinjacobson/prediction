@@ -57,6 +57,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				LinkIncremental="0"
+				ModuleDefinitionFile=""
+				AddModuleNamesToAssembly=""
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -199,21 +202,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\average.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\average.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -223,21 +217,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\bin_search_tree.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\bin_search_tree.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -247,21 +232,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\center_data.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\center_data.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -271,21 +247,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\ContrastFunctions.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\ContrastFunctions.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -295,21 +262,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\ConvolutionFilter.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\ConvolutionFilter.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -319,21 +277,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\covariance.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\covariance.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -343,21 +292,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\CWMacGlue.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\DataFormat.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -367,21 +307,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\DataReader.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\DataReader.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -391,21 +322,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\DataWriter.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\DataWriter.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -415,21 +337,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\eigenstuff.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\eigenstuff.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -439,21 +352,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\EpochMarkedSimpleBinary.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\EpochMarkedSimpleBinary.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -463,21 +367,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FastICANew.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FastICANew.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -487,21 +382,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FastICASettings.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FastICASettings.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -513,7 +399,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -523,21 +408,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FilterFactory.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FilterFactory.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -547,21 +423,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FilterOptions.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\FilterOptions.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -571,21 +438,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\index_array.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\index_array.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -597,7 +455,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -607,21 +464,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\InfomaxNew.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\InfomaxNew.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -631,21 +479,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\InfomaxSettings.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\InfomaxSettings.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -657,7 +496,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -669,7 +507,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -681,7 +518,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -693,7 +529,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -703,21 +538,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MatrixReader.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MatrixReader.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -727,21 +553,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MatrixWriter.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MatrixWriter.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -751,21 +568,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MersenneTwister.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MersenneTwister.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -775,21 +583,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MPIWrapper.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MPIWrapper.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -799,21 +598,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\NICFilter.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\NICFilter.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -823,21 +613,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\NicMatrix.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\NicMatrix.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -847,21 +628,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\NicVector.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\NicVector.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -871,21 +643,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\PartitionedDataset.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\PartitionedDataset.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -895,21 +658,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\ProgramTools.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\ProgramTools.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -919,21 +673,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\RangeGenerator.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\RangeGenerator.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -945,7 +690,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -955,21 +699,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\RingBlock.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\RingBlock.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -979,21 +714,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\SimpleCLParser.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\SimpleCLParser.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1003,21 +729,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\Sobi.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\Sobi.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1027,21 +744,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\SortComponents.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\SortComponents.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1051,21 +759,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\sphering_matrix.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\sphering_matrix.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1075,21 +774,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\StaticGainFilter.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\StaticGainFilter.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1099,21 +789,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\TypeIdentifier.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\TypeIdentifier.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1123,21 +804,12 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\version.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\version.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -1149,7 +821,6 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"

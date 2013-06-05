@@ -1,6 +1,6 @@
 #ifndef MERSENNETWISTER_H_UNIVERSITY_OF_OREGON_NIC
 #define MERSENNETWISTER_H_UNIVERSITY_OF_OREGON_NIC
-
+#include "../../../../correlations/stdafx.h"
 #include <iostream>
 
 // a portable random number generator class

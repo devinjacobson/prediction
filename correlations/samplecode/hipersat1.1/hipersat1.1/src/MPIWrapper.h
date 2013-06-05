@@ -6,6 +6,7 @@
 // build without using MPI and not have
 // a mess of ifdefs scattered throughout  
 // the algorithms
+#include "../../../../correlations/stdafx.h"
 
 #ifdef __DISTRIBUTED
 

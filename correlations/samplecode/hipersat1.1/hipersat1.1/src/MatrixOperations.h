@@ -1,6 +1,7 @@
 #ifndef MATRIXOPERATIONS_H_UNIVERSITY_OF_OREGON_NIC
 #define MATRIXOPERATIONS_H_UNIVERSITY_OF_OREGON_NIC
 
+#include "../../../../correlations/stdafx.h"
 #include "NicMatrix.h"
 #include "NicVector.h"
 #include "LAPACKWrapper.h"

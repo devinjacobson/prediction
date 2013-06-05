@@ -21,6 +21,9 @@
 #include <cstring>
 #include <cstddef>
 
+#define INSTANTIATE_TEMPLATES 1
+#define __MANUAL_LAPACK 1
+#define MINGW 1
 
 #define MAX_ENTRIES 10000
 

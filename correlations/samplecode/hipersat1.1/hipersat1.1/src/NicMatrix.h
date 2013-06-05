@@ -1,6 +1,7 @@
 #ifndef NICMATRIX_H_UNIVERSITY_OF_OREGON_NIC
 #define NICMATRIX_H_UNIVERSITY_OF_OREGON_NIC
 
+#include "../../../../correlations/stdafx.h"
 #include <cstdlib>
 #include <cassert>
 #include <iostream>

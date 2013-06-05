@@ -67,3 +67,12 @@ http://perso.telecom-paristech.fr/~cardoso/icacentral/algos.html
 http://ee.ucd.ie/~pogrady/
 http://sccn.ucsd.edu/eeglab/
 http://people.kyb.tuebingen.mpg.de/arthur/fastkica.htm
+
+
+http://sccn.ucsd.edu/wiki/Binica
+http://openica.sourceforge.jp/
+
+Seems we are close to getting the hipersat stuff to work, but still need this:
+http://www.netlib.org/clapack/
+and to integrate it manually.  
+

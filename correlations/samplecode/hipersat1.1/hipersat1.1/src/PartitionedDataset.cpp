@@ -2,8 +2,7 @@
 #define PARTITIONEDDATASET_CPP_UNIVERSITY_OF_OREGON_NIC
 #include <cstdio>
 
-#define MINGW 1
-
+#include "../../../../correlations/stdafx.h"
 #include "PartitionedDataset.h"
 #include "MPIWrapper.h"
 #include "TypeIdentifier.h"

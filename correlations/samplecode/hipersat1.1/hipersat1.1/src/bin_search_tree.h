@@ -1,6 +1,6 @@
 #ifndef BIN_SEARCH_TREE_H_UNIVERSITY_OF_OREGON_NIC
 #define BIN_SEARCH_TREE_H_UNIVERSITY_OF_OREGON_NIC
-
+#include "../../../../correlations/stdafx.h"
 // a very simple search tree.
 template<class Struct>
 class bin_search_tree 
