@@ -57,7 +57,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalOptions="/NODEFAULTLIB:library"
 				LinkIncremental="0"
+				IgnoreDefaultLibraryNames="Libcmtd.lib"
 				ModuleDefinitionFile=""
 				AddModuleNamesToAssembly=""
 				GenerateDebugInformation="true"
@@ -516,13 +518,6 @@
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MatrixOperations.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\samplecode\hipersat1.1\hipersat1.1\src\MatrixOperations.h"

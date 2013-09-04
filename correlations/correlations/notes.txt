@@ -76,3 +76,6 @@ Seems we are close to getting the hipersat stuff to work, but still need this:
 http://www.netlib.org/clapack/
 and to integrate it manually.  
 
+So have to include this.  
+This is before I included.  
+

@@ -103,20 +103,20 @@ int sgemm_(char *, char *, int *, int *, int *,
 #ifdef __MANUAL_LAPACK //#######################################################
 
 #if 1
-//#include "blaswrap.h"                                                         //
-//#include "f2c.h"                                                              //
+#include "../../../CLAPACK/CLAPACK-3.1.1-VisualStudio/INCLUDE/blaswrap.h"                                                         //
+#include "../../../CLAPACK/CLAPACK-3.1.1-VisualStudio/INCLUDE/f2c.h"                                                              //
 
-//extern "C"
-//{
-	#include "clapack.h"
-//}
-//
-//#else
-//
 extern "C"
 {
-//	#include "cblas.h"
-/*
+	#include "../../../CLAPACK/CLAPACK-3.1.1-VisualStudio/INCLUDE/clapack.h"
+}
+
+#else
+
+extern "C"
+{
+	#include "../../../CLAPACK/CLAPACK-3.1.1-VisualStudio/INCLUDE/cblas.h"
+
 typedef int integer;
 typedef double doublereal;
 typedef float floatreal;
@@ -151,7 +151,7 @@ int sgemm_(char *, char *, int *, int *, int *,
 		  int *, float*, float*, int *);
 
 typedef int CLAPACK_integer;
-*/
+
 }
 
 
