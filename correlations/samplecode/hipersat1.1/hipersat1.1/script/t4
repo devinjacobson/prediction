@@ -1,0 +1,1 @@
+$GLOBUS_LOCATION/bin/zone-client -e $HOME/NIC/scenic/proto2/java/zone/t3.epr -t

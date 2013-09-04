@@ -1,0 +1,59 @@
+Copyright (C) 
+2010-2011 Jakob Zscheischler
+2010-2011 Kun Zhang
+
+This package contains code to the paper
+Jakob Zscheischler, Dominik Janzing, Kun Zhang (2011): "Testing whether linear equations are causal: A free probability theory approach".
+
+It is written in Matlab and should work on any machine. 
+
+
+%%%%%%%%%%%%
+LICENSE
+%%%%%%%%%%%%
+
+This project is licensed under the (Free)BSD License.
+
+
+%%%%%%%%%%%%
+CODE
+%%%%%%%%%%%%
+
+ALWAYS: reows are dimensions, columns are samples
+
+template.m
+gives some examples how to apply the code to given data matrices X and Y
+
+highdimmodel.m 		
+generates high-dimensional variables [X Y] with the structure X-->Y
+
+conf_model.m 
+generates high-dimensional variables [X Y] with the structure X<--Z-->Y
+
+highdimmodel_sparse 
+generates high-dimensional variables [X Y] with the structure X-->Y from a sparse transfer matrix A
+
+significance.m
+applies the significance test described in the paper
+
+significance_sparse.m
+applies the significance test for the dimension reduction approach
+
+twocause.m
+calculates the deltas defined in the paper (equation(6))
+
+unimat.m 
+calculates uniformly distributed orthogonal matrices
+
+run.m produces Figure 1 of the paper
+
+./sparse
+contains code for the dimension reduction approach (preliminary)
+
+
+%%%%%%%%%%%%%
+PROBLEMS
+%%%%%%%%%%%%%
+If you have problems or questions (or find some bugs!), please do not hesitate to send an email:
+jakob.zscheischler ---at--- tuebingen.mpg.de
+

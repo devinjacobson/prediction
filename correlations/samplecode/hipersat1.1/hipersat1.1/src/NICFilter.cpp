@@ -1,0 +1,9 @@
+#ifndef NICFILTER_CPP_UNIVERSITY_OF_OREGON_NIC
+#define NICFILTER_CPP_UNIVERSITY_OF_OREGON_NIC
+
+#include "NICFilter.h"
+
+template class NICFilter<double>;
+
+#endif
+// NICFILTER_CPP_UNIVERSITY_OF_OREGON_NIC

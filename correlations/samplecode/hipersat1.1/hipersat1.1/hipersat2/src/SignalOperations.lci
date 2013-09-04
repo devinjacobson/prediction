@@ -1,0 +1,52 @@
+#include "SignalOperations.h"
+
+extern "C"
+{
+    static int average_NicMatrix(lua_State* L)
+    {
+        NicMatrix<double>** matrix = getMatrix_NicMatrix(L,1);
+        int rows = (*matrix)->rows();
+        NicMatrix<double>** avg = allocate_NicMatrix(L, rows, 1);
+        
+        average<double>(*matrix, *avg);
+        return 1;
+    }
+    
+    static int center_NicMatrix(lua_State* L)
+    {
+        NicMatrix<double>** matrix = getMatrix_NicMatrix(L,1);
+        int rows = (*matrix)->rows();
+        NicMatrix<double>** avg = allocate_NicMatrix(L, rows, 1);
+        
+        average<double>(*matrix, *avg);
+        center<double>(*matrix, *avg);
+        return 1;
+    }
+    
+    static int covariance_NicMatrix(lua_State* L)
+    {
+        NicMatrix<double>** matrix = getMatrix_NicMatrix(L,1);
+        
+        int rows = (*matrix)->rows();
+        NicMatrix<double>* avg = new NicMatrix<double>(rows, 1);
+        NicMatrix<double>** cov = allocate_NicMatrix(L, rows, rows);
+        
+        covariance<double>(*matrix, avg, *cov);
+        
+        delete avg;
+        return 1;
+    }
+    
+    // the columns of the returned matrix are the eigenvectors
+    static int eigenvalues_NicMatrix(lua_State* L)
+    {
+        NicMatrix<double>** matrix = getMatrix_NicMatrix(L,1);
+        int rows = (*matrix)->rows();
+        NicMatrix<double>** eigenvals = allocate_NicMatrix(L, rows, 1);
+        NicMatrix<double>** eigenvectors = allocate_NicMatrix(L, rows, rows);
+
+        eigenvalues<double>(*matrix, *eigenvals, *eigenvectors);
+        return 2;
+    }
+    
+}

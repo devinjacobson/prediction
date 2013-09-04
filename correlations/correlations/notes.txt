@@ -1,0 +1,78 @@
+So here is what they propose from some of the papers.  
+
+Regression of Y = f(X) + N leads to residuals N^
+Regression of X = g(Y) + O leads to residuals O^
+
+if N^ correlated to X, but O^ not correlated to Y, then X->Y
+if O^ correlated to X, but N^ not correlated to Y, then Y->X
+if N^ not correlated to X and O^ not correlated to Y, then ?
+if N^ correlated to X and O^ correlated to Y, then possibly both direction correlation.  
+
+Seems like all the code is Mathlab code unfortunately.  
+
+http://webdav.tuebingen.mpg.de/causality/Zhang_09.pdf
+seems most readable.  
+Yeah for me this is the best.  
+But can we actually read this or test this?  
+We need to know the minimizing of mutual information test
+and then the final test for significance:
+kernel-based statistical test (Gretton et al., 2008), with
+the significance level  = 0.01
+
+http://en.wikipedia.org/wiki/Independent_component_analysis
+
+ICA in C++
+Independent component analysis
+x = a1*s1 + a2*s2+a3*s3
+separate teh source values s1 through sx
+
+y = y1+y2+y3 ...
+Make these y1 = x1, y2 = g2(x2) - g1(x1)
+have to make these as independent as possible.  
+y1 and y2.  
+not sure how this is done?  
+decrease mutual information?  
+if y1 and y2 not independent then x does not cause y.  
+
+So basically we are trying to find randomness in the error values. 
+If we find randomness, then we think we have a useful model. 
+If we did not find randomness, then the model is invalidated.  
+
+they say non-correlation with the signal, I say randomness.  
+because we dont know what the non-signal is, it could be random or not.  
+So we could implement and test this, but I'm still not convinced this logic stands.  
+I guess I have to try and see that the values are not the same for X->Y and Y->X
+It seems like they should be pretty much the same with the inverted model.  
+
+
+So we are dividing into a model and noise.  
+And from that we think we can determine if the model is significant or not.  
+
+
+C:\web\chorrd\prediction\correlations\samplecode\hipersat1.1\hipersat1.1\src
+
+using this:
+https://github.com/devinjacobson/prediction
+as the repository.  
+Could do just dropbox if that is easier.  
+
+git clone prediction https://github.com/devinjacobson/prediction.git
+
+push to GIT!
+git remote add prediction https://github.com/devinjacobson/prediction.git
+git push -u prediction master
+
+
+http://perso.telecom-paristech.fr/~cardoso/icacentral/algos.html
+http://ee.ucd.ie/~pogrady/
+http://sccn.ucsd.edu/eeglab/
+http://people.kyb.tuebingen.mpg.de/arthur/fastkica.htm
+
+
+http://sccn.ucsd.edu/wiki/Binica
+http://openica.sourceforge.jp/
+
+Seems we are close to getting the hipersat stuff to work, but still need this:
+http://www.netlib.org/clapack/
+and to integrate it manually.  
+

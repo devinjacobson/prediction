@@ -1,0 +1,238 @@
+================================================================================
+                          HiPerSAT v1.0 Release Notes
+================================================================================
+
+[0] License and disclaimer
+[1] About HiPerSAT
+[2] Known Working Configurations
+[3] Known Problems
+
+[0] License and Disclaimer
+----------------------------------------------------------------------
+High Performance Signal Analysis Toolkit, HiPerSAT                                   
+Copyright 2005-2006                                           
+Neuroinformatics Center, University of Oregon                  
+
+Send questions, feature requests and bug reports to hipersat@nic.uoregon.edu
+       
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation, and that the name of University of Oregon (UO)
+and Neuroinformatics Center (NIC) not be used in advertising or 
+publicity pertaining to distribution of the software without specific, 
+written prior permission.  The University of Oregon and Neuroinformatics
+Center make no representations about the suitability of this software 
+for any purpose.  It is provided "as is" without express or implied warranty.
+
+UO AND NIC DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
+INCLUDING, AND ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, 
+IN NO EVENT SHALL THE UNIVERSITY OF OREGON OR NIC BE LIABLE FOR
+ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+[1] About HiPerSAT
+----------------------------------------------------------------------
+HiPerSAT is a high-performance C++ implementation of the
+Infomax, FastICA, and Sobi component separation algorithms. HiPerSAT can
+be run as a program which reads data files and writes out solution
+files.
+
+The HiPerSAT program is built upon the HiPerSAT framework,
+a C++ library for use in building applications needing component
+separation. The HiPerSAT framework is described in a separate
+(not yet existing) document.
+
+
+[2] Known working configurations
+----------------------------------------------------------------------
+Platforms:
+1)	MacOSX 10.3/10.4
+    Compilers: gcc 3.x, 4.x
+	Input:    column-major, binary data (either endianness)
+
+2)  i386, Linux
+    Compilers: gcc, icc (with OpenMP support)
+
+3)  Opteron, 64 bit Linux
+    Compilers: gcc 3.x, icc
+
+4)  Power4, p-series Linux
+    Compilers: gcc 3.x, xlC
+
+
+[3] Known Problems with HiPerSAT
+----------------------------------------------------------------------
+Problem:
+    HiPerSAT window does not open on first attempt to run 'hinfomax'
+    or 'hfastica'
+    
+    
+Workaround:
+    Try again. The window generally opens on the second attempt.
+
+Fix:
+    We are investigating the source of this problem.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Problem:
+    HiPerSAT Infomax crashes if -sphering is not specified.
+    
+    
+Workaround:
+    Always pass the -sphering flag.
+
+Fix:
+    Two items need to be addressed. We need to add a flag to load
+    a sphering matrix from file, and fix the algorithm to compute
+    the correct results without a sphering matrix.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Problem:
+    HiPerSAT can not load .raw files.
+    
+    
+Workaround:
+    Load the .raw files into Matlab and re-save as either a binary
+    file or a transposed text file.
+
+Fix:
+    We need to implement a raw file reader.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Problem:
+    hFastICA has no reasonable default values.
+    
+    
+Workaround:
+    Specify all of the values at the command line.
+
+Fix:
+    Implement default values that match the defaults of the eeglab
+    version.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Problem:
+	hSobi does not sphere the data.
+    
+    
+Workaround:
+    Use Matlab of hSphering to sphere the data.
+
+Fix:
+    Add sphering options to hSobi.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Problem:
+    hSphering does not output a sphering matrix.
+    
+Workaround:
+    Use Matlab to generate a sphering matrix if you need it.
+
+Fix:
+    Add an option to output the sphering matrix.
+----------------------------------------------------------------------
+
+Legacy problems (which may not be problems any more)
+----------------------------------------------------------------------
+Problem:
+
+    MPI nodes.txt requires that the first entry is the master process
+    
+    SC makes assumption that the MPI process with rank==0 is the
+    master process which has access to the data and .form files.
+    However, when the nodes.txt file (used for 'lamboot') is used, the
+    first entry in the list is always rank=0.
+    
+Workaround:
+
+    Ensure that the nodes.txt file that is being used for 'lamboot' has
+    your 'master' node (the one with your eeg data and .form files) as
+    the first entry.
+
+Fix:
+
+    We need to figure out the rank of the process that initiated (i.e.,
+    the one that ran 'mpirun') and use it as our master.
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+Problem:
+
+    SC assumes that the initial guess has been whitened prior to
+    use. This means that in order for a MATLAB fastica() user to
+    compare results, they must also prewhiten any initial guess.
+    
+Workaround:
+
+    Understand this limitation and prewhiten any initial guess.
+    I think this means that the 'identity' initial guess is also
+    assumed to be whitened. Is this true, Bob?
+
+Fix:
+
+    We should probably fix this bug, rather than deal with the trouble
+    of explaining it away.
+
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+Problem:
+
+    The write_validate() function does not work if the specified file
+    does not already exist. Thus, write_validate() is not used within
+    SC currently. This means that there is no checking for validity of the
+    output files until writing them is actually attempted.
+    
+Workaround:
+
+    There is none. Be careful.
+
+Fix:
+
+    We need to enable the use of write_validate() and fix this function.
+    Basically, access() fails if the file does not exist.
+    
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Problem:
+
+    The FormEditor gui does not allow the selection of file types for the
+    input weight and sphering files. It assumes platform-binary.
+    
+    Similarly, the output files are always platform-binary when specified via
+    the FormEditor gui.
+    
+Workaround:
+
+    Ensure that the input weight and sphering files are of the correct type
+    and endianness.
+
+Fix:
+    
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+Problem:
+    
+    
+Workaround:
+
+
+Fix:
+----------------------------------------------------------------------

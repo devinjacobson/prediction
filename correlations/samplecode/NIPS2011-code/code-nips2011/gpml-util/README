@@ -1,0 +1,5 @@
+This directory contains the LBFGSB related wrappers of the GPML toolbox (from
+the util/ subdirectory).
+
+The GPML toolbox is available at http://www.gaussianprocess.org/gpml/code but
+part of it has been included here for convenience.

@@ -1,0 +1,4 @@
+This directory contains the data sets used for doing the experiments.
+Abalone is taken from the UCI Machine Learning Repository:
+
+Asuncion, A. & Newman, D.J. (2007). UCI Machine Learning Repository [http://www.ics.uci.edu/~mlearn/MLRepository.html]. Irvine, CA: University of California, School of Information and Computer Science. 

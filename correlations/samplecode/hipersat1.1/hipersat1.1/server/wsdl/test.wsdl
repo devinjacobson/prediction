@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:Test" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:Test" xmlns:intf="urn:Test" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="urn:Test" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_soapenc_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="soapenc:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="fastIcaRequest">
+
+      <wsdl:part name="in0" type="xsd:int"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+      <wsdl:part name="in2" type="soapenc:string"/>
+
+      <wsdl:part name="in3" type="soapenc:string"/>
+
+      <wsdl:part name="in4" type="xsd:int"/>
+
+      <wsdl:part name="in5" type="xsd:int"/>
+
+      <wsdl:part name="in6" type="xsd:float"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="jobStatusResponse">
+
+      <wsdl:part name="jobStatusReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="jobOutputResponse">
+
+      <wsdl:part name="jobOutputReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="jobStatusRequest">
+
+      <wsdl:part name="in0" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createFileEntryRequest">
+
+      <wsdl:part name="name" type="soapenc:string"/>
+
+      <wsdl:part name="description" type="soapenc:string"/>
+
+      <wsdl:part name="channels" type="xsd:int"/>
+
+      <wsdl:part name="samples" type="xsd:int"/>
+
+      <wsdl:part name="format" type="soapenc:string"/>
+
+      <wsdl:part name="precision" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createFileEntryResponse">
+
+      <wsdl:part name="createFileEntryReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queueResponse">
+
+      <wsdl:part name="queueReturn" type="impl:ArrayOf_soapenc_string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResponse">
+
+      <wsdl:part name="testReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queueRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="testRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="jobOutputRequest">
+
+      <wsdl:part name="in0" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="fastIcaResponse">
+
+      <wsdl:part name="fastIcaReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="infomaxResponse">
+
+      <wsdl:part name="infomaxReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="infomaxRequest">
+
+      <wsdl:part name="fileid" type="xsd:int"/>
+
+      <wsdl:part name="sphering" type="soapenc:string"/>
+
+      <wsdl:part name="annealing" type="xsd:float"/>
+
+      <wsdl:part name="annealingDegree" type="xsd:float"/>
+
+      <wsdl:part name="blockSize" type="xsd:int"/>
+
+      <wsdl:part name="learningRate" type="xsd:float"/>
+
+      <wsdl:part name="maxSteps" type="xsd:int"/>
+
+      <wsdl:part name="stopCondition" type="xsd:float"/>
+
+      <wsdl:part name="seed" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sobiResponse">
+
+      <wsdl:part name="sobiReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sobiRequest">
+
+      <wsdl:part name="in0" type="xsd:int"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Test">
+
+      <wsdl:operation name="jobStatus" parameterOrder="in0">
+
+         <wsdl:input message="impl:jobStatusRequest" name="jobStatusRequest"/>
+
+         <wsdl:output message="impl:jobStatusResponse" name="jobStatusResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="jobOutput" parameterOrder="in0">
+
+         <wsdl:input message="impl:jobOutputRequest" name="jobOutputRequest"/>
+
+         <wsdl:output message="impl:jobOutputResponse" name="jobOutputResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createFileEntry" parameterOrder="name description channels samples format precision">
+
+         <wsdl:input message="impl:createFileEntryRequest" name="createFileEntryRequest"/>
+
+         <wsdl:output message="impl:createFileEntryResponse" name="createFileEntryResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="infomax" parameterOrder="fileid sphering annealing annealingDegree blockSize learningRate maxSteps stopCondition seed">
+
+         <wsdl:input message="impl:infomaxRequest" name="infomaxRequest"/>
+
+         <wsdl:output message="impl:infomaxResponse" name="infomaxResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fastIca" parameterOrder="in0 in1 in2 in3 in4 in5 in6">
+
+         <wsdl:input message="impl:fastIcaRequest" name="fastIcaRequest"/>
+
+         <wsdl:output message="impl:fastIcaResponse" name="fastIcaResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sobi" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:sobiRequest" name="sobiRequest"/>
+
+         <wsdl:output message="impl:sobiResponse" name="sobiResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="queue">
+
+         <wsdl:input message="impl:queueRequest" name="queueRequest"/>
+
+         <wsdl:output message="impl:queueResponse" name="queueResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="test">
+
+         <wsdl:input message="impl:testRequest" name="testRequest"/>
+
+         <wsdl:output message="impl:testResponse" name="testResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="SOAPSoapBinding" type="impl:Test">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="jobStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="jobStatusRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="jobStatusResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="jobOutput">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="jobOutputRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="jobOutputResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createFileEntry">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createFileEntryRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createFileEntryResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="infomax">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="infomaxRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="infomaxResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fastIca">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fastIcaRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fastIcaResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sobi">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sobiRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sobiResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="queue">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="queueRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="queueResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="test">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:Test" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TestService">
+
+      <wsdl:port binding="impl:SOAPSoapBinding" name="SOAP">
+
+         <wsdlsoap:address location="http://rubato.nic.uoregon.edu:4063/SOAP"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,116 @@
+#!/usr/bin/env python
+# requires python 2.3 or greater
+
+import string
+import sys
+import popen2
+import fcntl
+import select
+import os
+import re
+import optparse
+
+def setupParser( ):
+    parser = optparse.OptionParser()
+    parser.add_option( "-c", "--command", dest="command", help="specify the command to run remotely", default="echo test" )
+    parser.add_option( "-r", "--remoteHost", dest="host", help="run the job on a remote host" )
+    parser.add_option( "-i", "--inputDir", dest="input", help="the directory that contains the input files" )
+    parser.add_option( "-o", "--outputDir", dest="output", help="the directory that contains the output files" )
+    parser.add_option( "-p", "--remotePath", dest="path", help="the path for the io directories on the remote host (default /tmp)", default="/tmp" )
+    parser.add_option( "-q", "--quiet", dest="verbose", action="store_false", default=True, help="run quietly (no process output to screen)" )
+    parser.add_option( "-X", "--X11", dest="X11", action="store_true", default=False, help="enable X11 forwarding" )
+    parser.add_option( "-d", "--disableDisplay", dest="disableDisplay", action="store_true", default=False, help="disable automatic setting of display" )
+
+    return parser.parse_args()
+
+# I'm not sure if this method is correct. I need to do 
+# more research to make sure
+def makeNonBlocking( fileHandle ):
+    "makes a file handle non-blocking"
+    fl = fcntl.fcntl( fileHandle, fcntl.F_GETFL )
+    try:
+        fcntl.fcntl( fileHandle, fcntl.F_SETFL, fl | os.O_NDELAY )
+    except AttributeError:
+        fcntl.fcntl( fileHandle, fcntl.F_SETFL, fl | os.FNDELAY )
+
+def launchProcess( command, showOutput ):
+    "launches a shell process and writes the output to stdout if showOutput is true"
+    print "Launching: " + command
+    pipeError = True
+    child = popen2.Popen3( command, pipeError )
+    
+    # set up the file descriptors
+    infile = child.tochild.close()
+    outfile = child.fromchild
+    errfile = child.childerr
+
+    outfileD = outfile.fileno()
+    errfileD = errfile.fileno()
+
+    makeNonBlocking( outfileD )
+    makeNonBlocking( errfileD )
+
+    outdata = errdata = ''
+    outeof = erreof = 0
+    while 1:
+        ready = select.select( [outfileD, errfileD ], [], [] ) # wait for input
+        if outfileD in ready[ 0 ]:
+            outchunk = outfile.read()
+            if showOutput:
+                print outchunk
+            if outchunk == '': 
+                outeof = 1
+            outdata = outdata + outchunk
+        if errfileD in ready[ 0 ]:
+            errchunk = errfile.read()
+            if showOutput:
+                print errchunk
+            if errchunk == '':
+                erreof = 1
+            errdata = errdata + errchunk
+        if outeof and erreof:
+            break
+        select.select( [], [], [], 0.1 ) # give the buffers some time to fill
+    err = child.wait()
+    if err != 0:
+        errdata += "\n%s filed with exit code %d\n%s" % (
+            command, err, errdata )
+#        raise RuntimeError, "%s failed with exit code %d\n%s" % ( 
+#            command, err, errdata  )
+    return ( outdata, errdata )
+
+if __name__ == "__main__":
+    (options, args) = setupParser()
+    stageInCommand1 = None
+    stageInCommand2 = None
+    stageOutCommand = None
+
+    X11pre = ""
+    X11post = ""
+
+    if options.X11:
+        if ( not options.disableDisplay ):
+            X11pre = "DISPLAY=:0.0"
+        X11post = "-X"
+
+    if options.host != None:
+        options.command = '%s ssh %s %s "%s"' % ( X11pre, X11post, options.host, options.command )
+
+        if options.input != None:
+            stageInCommand1 = "scp -r %s %s:%s%s" % ( options.input, options.host, options.path, options.input )
+            stageInCommand2 = "scp -r %s %s:%s%s" % ( options.output, options.host, options.path, options.output )
+            launchProcess( stageInCommand1, options.verbose )
+            launchProcess( stageInCommand2, options.verbose )
+
+        if options.output != None:
+            stageOutCommand = "scp %s:%s%s/* %s/." % ( options.host, options.path, options.output, options.output )
+#            stageOutCommand = "rsync --rsh=ssh --verbose --progress --stats --recursive %s:%s/%s/* %s" % ( options.host, options.path, options.output, options.output ) 
+
+    #if stageInCommand != None :
+    #    launchProcess( stageInCommand, options.verbose )
+
+    launchProcess( options.command, options.verbose )
+
+    if stageOutCommand != None :
+        launchProcess( stageOutCommand, options.verbose )
+

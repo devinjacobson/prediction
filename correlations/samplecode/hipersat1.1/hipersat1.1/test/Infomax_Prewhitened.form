@@ -1,0 +1,192 @@
+//
+//  Infomax Test form
+//  prewhitened data
+//  cubic contrast
+//
+
+Process: Infomax 
+Source data location: data/4x1001-x_WI.scf 
+File type: big-endian 
+Orientation: channels x observations 
+Channels: 4 
+Observations: 1001 
+N processors: 1
+
+
+//
+// Preprocessing form
+//
+
+Preprocessing procedure: 0
+Sphering matrix: file 
+Sphering source: "data/4x1001-i.scf" 
+Sphering type: big-endian 
+Sphering orientation: column-major
+
+
+//
+// Infomax form
+//
+//
+//
+//  --------------------------------------------------------------------------------
+//  The Infomax processing instructions allow the user to configure the Infomax 
+//  process and to control the iteration process. 
+//
+//
+//  The Infomax process is a neural network learning algorithm that requires input
+//  parameters to refine the algorithm's learning rate. The values required by the
+//  algorithm are set as options to the following fields: "Learn set size,"
+//  "Learning rate," "Annealing degree," "Annealing scale," "Maximum weight,"
+//  "Maximum divergence," "Weight restart factor," "Divergence restart factor,"
+//  and "Minimum learning rate." The user is also allowed to impose deterministic
+//  processing through the "Random learning" field. 
+//  
+//  The "Learning set size" is ignored by the code at this time, so any integer
+//  	value is acceptable.
+//  
+//  The "Learning rate" field is used to determine the algorithm's initial
+//  	learning rate.
+//  
+//  The "Maximum weight" field defines the largest acceptable element of the weight
+//  	matrix. If any element exceeds this value, the procedure is restarted
+//  	and the learning rate is reduced by the weight restart factor.
+//  
+//  The "Weight restart factor" field is the factor by which the learning rate is
+//  	reduced after an element of the weight matrix exceeds the maximum 
+//  	allowable value.
+//  
+//  The "Maximum divergence"  field defines the largest allowable difference
+//  	between sucessive measures of the weight matrix.
+//  
+//  The "Divergence restart factor" field is the factor by which the learning
+//  	rate is reduced after the maximum divergence is exceeded
+//  
+//  The "Minimum learning rate" field is the smallest allowable learning rate.
+//  	If the learning rate falls below this value, the program is 
+//  	terminated
+//  
+//  The "Annealing degree" field defines the maximum annealing angle before the
+//  	learning rate is refined. 
+//  
+//  The "Annealing scale" field is the factor by which the learning rate is reduced
+//  	after the annealing degree is exceeded
+//  
+//  The following table shows the relationship between the signal cleaner's 
+//  Infomax implementation and EEGLab's implementation.
+//  
+//  Signal Cleaner			runica
+//  Learning rate			DEFAULT_LRATE
+//  Annealing degree		DEFAULT_ANNEALDEG
+//  Annealing scale			DEFAULT_ANNEALSTEP
+//  Maximum weight			MAX_WEIGHT
+//  Maximum divergence		DEFAULT_BLOWUP
+//  Weight restart factor		DEFAULT_RESTART_FAC
+//  Divergence restart factor	DEFAULT_BLOWUP_FAC
+//  Minimum learning rate		MIN_LRATE
+//  
+//  
+//  The user can also configure the Infomax process to use a specific method to
+//  initialize the weight matrix. The "Initialization Type" field allows three 
+//  options, the:
+//  
+//  	"random" option, which generates a random matrix containing the 
+//  		initial guess
+//  	"identity matrix" option, which generates an identity matrix as
+//  		the initial guess
+//  	"user defined" option, which allows the user to supply a file containing
+//  		the initial guess
+//  
+//  
+//  If the user selects the "user defined" option for "Initialization Type," then he
+//  or she must also supply "User defined source," "User defined type" and "User 
+//  defined orientation." The "User defined source" field requires the name and path
+//  of the file containing the initial guess.
+//  
+//  The "User defined type" field accepts two options, the:
+//  
+//  	"binary" option is used when the guess is stored in a binary file
+//  	"ascii" option is used when the guess is stored in an ASCII file
+//  
+//  The "User defined orientation" field accepts two options, the:
+//  
+//  	"column-major" option is used when the guess is stored as a column-
+//  		major matrix
+//  	"row-major" option is used when the guess is stored as a row-major
+//  		matrix
+//  
+//  
+//  
+//  The user can control the iteration loop by specifying the "Converence tolerance"
+//  and "Maximum iterations" fields. The convergence error is computed as 
+//  |1 - w*wold'|, where w is the current estimate of the weight matrix and 
+//  wold is the previous estimate. When the convergence error is less than the
+//  convergence tolerance, the iteration terminates.  To set the convergence
+//  tolerance, the user must supply the desired value as an option to the 
+//  "Converence tolerance" field. The user can also define the maximum number of 
+//  iterations by supplying the desired value as as option to the "Maximum 
+//  iterations" field.
+//  
+//  --------------------------------------------------------------------------------
+//  	-- Infomax PROCESSING INSTRUCTIONS --
+//  
+//  Convergence tolerance		: 0.000001
+//  Maximum iterations		: 10
+//  Retries				: this option not yet implemented
+//  
+//  	initialization options
+//  		random
+//  		identity matrix
+//  		user defined
+//
+
+Initialization Type		: identity
+User defined source		: ""
+User defined type		: binary
+User defined orientation	: column-major
+
+//  
+//  	-- NEURAL NETWORK INSTRUCTIONS --
+//  
+Learn set size			: 35
+Learning rate			: 0.001
+Annealing degree		: 60
+Annealing scale			: 0.90
+
+Maximum weight			: 100000000
+Maximum divergence		: 1000000000
+Weight restart factor	        : 0.9
+Divergence restart factor	: 0.8
+Minimum learning rate 		: 0.000001
+Maximum iterations              : 512
+Convergence tolerance		: 0.000001
+Random Learning			: n
+
+
+//
+// ICA output form
+//
+Show convergence: no
+Weight matrix screen: n
+Mixing matrix screen: n
+Unmixing matrix screen: n
+Q matrix screen: n
+Lambda ^(-1/2) matrix screen: n
+Average vector screen: n
+Covariance matrix screen: n
+//Sphering matrix screen: n
+File name: tmp/Infomax_Prewhitened
+Weight matrix file: e
+// Mixing==A unmixing==W
+Mixing matrix file: e
+Unmixing matrix file: e
+Q matrix file: n
+Lambda ^(-1/2) matrix file: n
+Average vector file: n
+Covariance matrix file: n
+Sphering matrix file: e
+Independent component file name: tmp/Infomax_Prewhitened.IC
+//Validate form load: yes
+
+
+

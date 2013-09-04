@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+
+echo "HiPerSAT (High Performance Signal Analysis Tool) V0.3"
+echo "Using wrapper: $0"
+echo "Using form: $1"
+echo "Default dir: $2"
+
+export OMP_NUM_THREADS=1
+echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
+
+#export HIPERSAT_REMOTE_ENVIRONMENT="neuronic.nic.uoregon.edu:remoteEnvironment"
+	
+
+if [ "${HIPERSAT_HOME}" = "" ]
+then
+	echo > /dev/stderr "The environment symbol HIPERSAT_HOME must point to your HiPerSAT install directory."
+	echo > /dev/stderr "For example, add the following to your ~/.bashrc file:"
+	echo > /dev/stderr "	export HIPERSAT_HOME=~/HIPERSATInstall_v0.3"
+	echo > /dev/stderr ""
+else
+	if [ "${HIPERSAT_MPI}" = "" ]
+	then
+		export BIN="${HIPERSAT_HOME}/bin/hipersat-bin"
+	else
+		if [ "${HIPERSAT_MPI}" = "LAMMPI" ]
+		then
+			export SETUP="lamboot -v ${HIPERSAT_LAMMPI_MACHINEFILE}"
+			export BIN=${HIPERSAT_HOME}/bin/hipersat-gcc_lammpi_mac
+			export SHUTDOWN="lamhalt"
+		else
+			echo > /dev/stderr "Unknown MPI implementation specified in HIPERSAT_MPI: ${HIPERSAT_MPI}"
+			exit;
+		fi
+	fi
+
+	if [ "${HIPERSAT_REMOTE_ENVIRONMENT}" = "" ]
+	then
+		if [ "${2}" = "" ]
+		then
+			export STAGEIN=""
+			export STAGEOUT=""
+		else
+			export STAGEIN="pushd ${2}"
+			export STAGEOUT="popd"
+		fi
+	else
+		export STAGEIN="rsync --rsh=ssh --verbose --progress --stats --recursive ${2}/* ${HIPERSAT_REMOTE_ENVIRONMENT}/exampleJob"
+		export STAGEOUT="rsync --rsh=ssh --verbose --progress --stats --recursive ${HIPERSAT_REMOTE_ENVIRONMENT}/exampleJob/* ${2}/"
+		#export STAGEIN="scp -r ${2}/* ${HIPERSAT_REMOTE_ENVIRONMENT}/exampleJob"
+		#export STAGEOUT="scp -r ${HIPERSAT_REMOTE_ENVIRONMENT}/exampleJob/* ${2}/"
+		export BIN="${HIPERSAT_HOME}/bin/t4"
+		echo "STAGEIN=$STAGEIN"
+		echo "STAGEOUT=$STAGEOUT"
+	fi
+	
+	if [ "${BIN}" != "" ]
+	then
+		export BIN="${BIN}"
+		
+		${STAGEIN}
+		${SETUP}
+		echo "hipersat: ${BIN} ${1}"
+		${BIN} ${1} &> /dev/stdout
+		${SHUTDOWN}
+		${STAGEOUT}
+	fi
+fi
+

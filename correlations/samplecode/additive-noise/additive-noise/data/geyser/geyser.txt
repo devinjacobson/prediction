@@ -1,0 +1,34 @@
+A Look at Some Data on the Old Faithful Geyser
+A. Azzalini and A. W. Bowman
+Applied Statistics, Vol. 39, No. 3 (1990), pp. 357-365
+http://www.jstor.org/sici?sici=0035-9254(1990)39%3A3%3C357%3AALASDO%3E2.0.CO%3B2-Z
+
+This data is also available in R: package MASS, as 'geyser'. It might be
+wise to leave out the durations which are exactly 4, exactly 3, and exactly
+2 as these were originally measured only as L, M, S (for some reason they
+could not measure these in seconds during night-time).
+
+
+
+In R, type:
+	library('MASS')
+	geyser
+then copy/paste to a file 'geyser.tmp1'
+
+In bash, type:
+	awk 'print $2,$3' geyser.tmp1 > geyser.tmp2
+
+The first column is w_t, the time interval between the starts of
+successive eruptions, the second is d_t, the duration of the
+subsequent eruption. 
+
+Then, type:
+	python geyser.py < geyser.tmp2 > geyser.dat
+
+This outputs three columns to geyser.dat, containing
+only precise data, in the form
+
+d_t i_t d_{t+1}
+
+So causally, we can only have that col 1 causes 2 (and maybe 3)
+and col 2 causes col 3.

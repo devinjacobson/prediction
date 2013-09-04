@@ -1,0 +1,70 @@
+//
+//  FastICA Test form
+//  Unwhitened data
+//  cubic contrast
+//
+
+Process: FastICA 
+Source data location: data/4x1001-x.scf 
+File type: B
+Orientation: channels x observations 
+Channels: 4 
+Observations: 1001 
+N processors: 4
+
+
+//
+// Preprocessing operations
+//
+
+Preprocessing procedure: 2
+"whiten"
+"store whitened data"
+Sphering matrix: none 
+Sphering source: "" 
+Sphering type: binary 
+Sphering orientation: column-major
+Whitened data file: tmp/4x1001-x_WF.scf
+
+
+//
+// FastICA form
+//
+
+Convergence tolerance: 0.0001   
+Maximum iterations: 1000
+Retries: 5
+Contrast function: cubic 
+Initialization Type: identity
+User defined source: "" 
+User defined type: binary 
+User defined orientation: column-major 
+
+
+
+//
+// ICA output form
+//
+Show convergence: no
+Weight matrix screen: n
+Mixing matrix screen: n
+Unmixing matrix screen: n
+Q matrix screen: n
+Lambda ^(-1/2) matrix screen: n
+Average vector screen: n
+Covariance matrix screen: n
+Sphering matrix screen: n
+File name: tmp/FastICA_Unwhitened_cubic
+Weight matrix file: e
+// Mixing==A unmixing==W
+Mixing matrix file: e
+Unmixing matrix file: e
+Q matrix file: n
+Lambda ^(-1/2) matrix file: n
+Average vector file: n
+Covariance matrix file: n
+Sphering matrix file: e
+Validate form load: no
+Independent component file name: tmp/4x1001-IndependentComponents
+
+

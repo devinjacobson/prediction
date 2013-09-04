@@ -1,0 +1,19 @@
+#ifndef DATAFORMAT_H_UNIVERSITY_OF_OREGON_NIC
+#define DATAFORMAT_H_UNIVERSITY_OF_OREGON_NIC
+
+namespace DataFormat
+{
+
+enum DataFormat
+{
+    BIG,
+    LITTLE,
+    NATIVE,
+    TEXT,
+    RAW
+};
+
+}
+
+#endif
+// DATAFORMAT_H_UNIVERSITY_OF_OREGON_NIC

@@ -1,0 +1,52 @@
+This file, pop_runica.txt, contains a fragment of MATLAB code that
+must be inserted into EEGLab's pop_runica.m script file to enable
+the use of HiPerSat from within EEGLab
+
+In EEGLab version 4.514, the text fragment below should be inserted just
+before the following code in eeglab4.514/functions/pop_runica.m:
+
+
+otherwise,
+
+    error('Pop_runica: unrecognized algorithm');
+
+end;
+
+
+Below is the text fragment to insert into pop_runica.m.
+        
+    % ----------------------------------------------------------------------------------------------------------------------
+
+    case { 'hfastica' , 'hinfomax' }
+
+        [EEG, cancel] = EeglabToHiPerSat(options, EEG, icatype, tmpdata);
+            
+        if cancel
+
+            return;
+
+        end
+
+    % ----------------------------------------------------------------------------------------------------------------------
+            
+
+In other words, the modified pop_runica.m should look like:
+
+    % ----------------------------------------------------------------------------------------------------------------------
+    
+    case { 'hfastica' , 'hinfomax' }
+
+        [EEG, cancel] = EeglabToHiPerSat(options, EEG, icatype, tmpdata);
+            
+        if cancel
+
+            return;
+
+        end
+    % ----------------------------------------------------------------------------------------------------------------------
+	            
+    otherwise
+
+        error('Pop_runica: unrecognized algorithm');
+
+end;
